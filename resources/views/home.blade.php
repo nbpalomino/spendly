@@ -4,7 +4,7 @@
         <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-color--teal-100 mdl-color-text--white">
             <i class="material-icons">play_circle_filled</i>
         </div>
-        <div class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet">
+        <div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-card">
             <div class="mdl-card__title">
                 <h3 class="mdl-card__title-text">BIENVENID@</h3>
             </div>
@@ -24,7 +24,7 @@
                                 </span>
                                 <span class="mdl-list__item-secondary-content">
                                     <span class="mdl-chip mdl-color-text--white mdl-color--{{ $item->isPositive() ? 'green' : 'red' }}-400">
-                                        <span class="mdl-chip__text">S/. {{ $item->isPositive() ? '' : '-' }}{{ $item->item->mount }}</span>
+                                        <span class="mdl-chip__text">S/. {{ $item->isPositive() ? '' : '-' }}{{ $item->item->amount }}</span>
                                     </span>
                                 </span>
                             </li>
@@ -34,7 +34,7 @@
                 @endforeach
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a href="#" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">@{{ cta }}</a>
+                <a href="{{ url('items/create') }}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">@{{ cta }}</a>
             </div>
         </div>
     </section>
