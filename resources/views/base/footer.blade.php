@@ -1,5 +1,5 @@
 <footer class="mdl-mega-footer">
-    <div class="mdl-mega-footer--middle-section">
+    <div class="mdl-mega-footer--middle-section" style="display:none;">
         <div class="mdl-mega-footer--drop-down-section">
             <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked="">
             <h1 class="mdl-mega-footer--heading">Features</h1>
@@ -42,7 +42,7 @@
     </div>
     <div class="mdl-mega-footer--bottom-section">
         <div class="mdl-logo">
-            More Information
+            Spendly Inc.
         </div>
         <ul class="mdl-mega-footer--link-list">
             <li><a href="https://developers.google.com/web/starter-kit/">Web Starter Kit</a></li>

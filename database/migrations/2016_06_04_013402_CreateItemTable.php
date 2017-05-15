@@ -16,8 +16,7 @@ class CreateItemTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
-            $table->dateTime('date');
-            $table->float('mount')->unsigned();
+            $table->float('amount')->unsigned();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

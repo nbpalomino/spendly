@@ -38,9 +38,9 @@ class Group extends Model
     {
         return $this->balances->reduce(function($total, Balance $item) {
             if($item->isPositive()) {
-                $total += $item->item->mount;
+                $total += $item->item->amount;
             } else {
-                $total -= $item->item->mount;
+                $total -= $item->item->amount;
             }
             return $total;
         });

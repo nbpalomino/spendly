@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Balance extends Model
 {
+    const POSITIVE = 1;
+    const NEGATIVE = 0;
+
     /**
      * The attributes that are mass assignable.
      *
