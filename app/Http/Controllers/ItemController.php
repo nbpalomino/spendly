@@ -15,7 +15,7 @@ class ItemController extends Controller
         $this->user = User::with('groups')->findOrFail(1);
     }
 
-    public function index()
+    public function index(Request $req)
     {
         // GET -> /item
         return $this->user->groups->reduce(function($items, Group $group){
@@ -23,12 +23,11 @@ class ItemController extends Controller
         }, []);
     }
 
-    public function create()
+    public function create(Request $req)
     {
-        $user = User::with('groups')->findOrFail(1);
         $data = [
-            'who' => $user->name,
-            'user' => $user,
+            'who' => $this->user->name,
+            'user' => $this->user,
         ];
         return view('item/create', $data);
     }
@@ -36,47 +35,66 @@ class ItemController extends Controller
     public function store(Request $req)
     {
         // POST -> /item
-        $user = User::with('groups')->findOrFail(1);
+        $group    = $this->user->getGroup($req->input('group'));
 
-        if(! $user->isValidGroup($req->input('group')) ) {
-            return redirect('/item/create');
+        if( !$group ) {
+            return redirect('/item/create?status=error');
         }
 
         try {
-            $item     = Item::create($req->all());
-            $group    = $user->getGroup($req->input('group'));
-
-            $balance = $group->items()->create([
-                $req->all()
-            ]);
+            $item = new Item($req->all());
+            $group->items()->save($item);
 
         } catch (Exception $e) {
-            return ['status'=>'ERROR', 'message'=>$e->getMessage()];
+            return redirect('/?status=error');
         }
 
-        return redirect('/');
+        return redirect('/?status=ok');
     }
 
     public function show(Request $req, $id)
     {
         // GET -> /item/{id}
-        return Item::findOrFail($id)->with('balance');
+        return Item::findOrFail($id)->with('group');
     }
 
-    public function edit($id)
+    public function edit(Request $req, $id)
     {
         // GET -> /item/{id}/edit
-        // $balance = Item::with(['balance'])->find($id);
-        $balance = Item::with(['group'])->whereIn('group_id', $this->user->getFromGroups('id'))->findOrFail($id);
-        return $balance;
+        $groups_id = $this->user->getFromGroups('id');
+        $item = Item::with('group')->whereIn('group_id', $groups_id)->findOrFail($id);
+        $data = [
+            'who' => $this->user->name,
+            'user' => $this->user,
+            'item' => $item,
+        ];
+        return view('item/edit', $data);
     }
 
-    public function update()
+    public function update(Request $req, $id)
     {
         // PUT -> /item/{id}
+        $this->user     = User::with('groups')->findOrFail(1);
+        $group     = $this->user->getGroup($req->input('group'));
+        $groups_id = $this->user->getFromGroups('id');
+
+        if( !$group ) {
+            return redirect("/item/{$id}/edit?status=error");
+        }
+
+        try {
+            $item = Item::with('group')->whereIn('group_id', $groups_id)->findOrFail($id);
+            $item->update($req->all());
+            $group->items()->save($item);
+
+        } catch (Exception $e) {
+            return redirect("/item/{$id}/edit?status=error");
+        }
+
+        return redirect('/?status=ok');
     }
 
-    public function delete()
+    public function delete(Request $req, $id)
     {
         // DELETE -> /item/{id}
     }
