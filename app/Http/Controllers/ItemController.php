@@ -12,13 +12,13 @@ class ItemController extends Controller
     public function __construct()
     {
         //$this->middleware('auth', ['except'=>['index']]);
+        $this->user = User::with('groups')->findOrFail(1);
     }
 
     public function index()
     {
         // GET -> /item
-        $user = User::with('groups')->findOrFail(1);
-        return $user->groups->reduce(function($items, Group $group){
+        return $this->user->groups->reduce(function($items, Group $group){
             return array_merge($items, $group->items->all());
         }, []);
     }
@@ -46,10 +46,8 @@ class ItemController extends Controller
             $item     = Item::create($req->all());
             $group    = $user->getGroup($req->input('group'));
 
-            $balance = $group->balances()->create([
-                'item_id'  => $item->id,
-                'group_id' => $group->id,
-                'type'     => (bool)$req->input('type') ? Balance::POSITIVE : Balance::NEGATIVE,
+            $balance = $group->items()->create([
+                $req->all()
             ]);
 
         } catch (Exception $e) {
@@ -69,7 +67,7 @@ class ItemController extends Controller
     {
         // GET -> /item/{id}/edit
         // $balance = Item::with(['balance'])->find($id);
-        $balance = Balance::with(['group','item'])->find($id);
+        $balance = Item::with(['group'])->whereIn('group_id', $this->user->getFromGroups('id'))->findOrFail($id);
         return $balance;
     }
 
