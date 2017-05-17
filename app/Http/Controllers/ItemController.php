@@ -67,7 +67,7 @@ class ItemController extends Controller
     {
         // GET -> /item/{id}/edit
         // $balance = Item::with(['balance'])->find($id);
-        $balance = Balance::with(['group','item'])->findByItem($id)->get();
+        $balance = Balance::with(['group','item'])->find($id);
         return $balance;
     }
 
