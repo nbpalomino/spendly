@@ -25,8 +25,7 @@ $factory->define(App\Item::class, function (Faker\Generator $faker) {
     return [
         'name' => ucfirst($faker->word),
         'description' => ucfirst($faker->words(2, true)),
-        'mount' => $faker->randomFloat(2, 10, 150),
-        'date' => new Datetime('now'),
+        'amount' => $faker->randomFloat(2, 10, 150),
     ];
 });
 
@@ -43,4 +42,3 @@ $factory->define(App\Balance::class, function (Faker\Generator $faker) {
         'item_id' => $faker->numberBetween(1,10),
     ];
 });
-

@@ -1,0 +1,19 @@
+.center {
+  margin: 0 auto;
+}
+.text-center {
+  text-align: center;
+}
+
+
+/*****************/
+/*** STYLES MISSING FROM GETMDL.IO ***/
+.floating-fab {
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  z-index: 900;
+}
