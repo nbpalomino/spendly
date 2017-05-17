@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/packages/material-design-lite/material.min.css" />
-    <link rel="stylesheet" href="/packages/mdl-select-component/mdl-selectfield.min.css">
+    <link rel="stylesheet" href="/assets/css/material.min.css" />
+    <link rel="stylesheet" href="/assets/css/mdl-selectfield.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
@@ -34,9 +34,8 @@
     @yield('main')
     <!-- /.container -->
     <!-- Load JS here for greater good =============================-->
-    <script async src="/packages/material-design-lite/material.min.js"></script>
-    <script async src="/packages/mdl-select-component/mdl-selectfield.min.js"></script>
-    <script async src="/packages/vue/dist/vue.js"></script>
+    <script async src="/assets/js/material.min.js"></script>
+    <script async src="/assets/js/mdl-selectfield.min.js"></script>
     @yield("scripts")
   </body>
 </html>
