@@ -26,19 +26,13 @@ $factory->define(App\Item::class, function (Faker\Generator $faker) {
         'name' => ucfirst($faker->word),
         'description' => ucfirst($faker->words(2, true)),
         'amount' => $faker->randomFloat(2, 10, 150),
+        'type' => $faker->numberBetween(0,1),
+        'group_id' => $faker->numberBetween(1,2),
     ];
 });
 
 $factory->define(App\Group::class, function (Faker\Generator $faker) {
     return [
         'name' => "Los ".ucfirst($faker->word),
-    ];
-});
-
-$factory->define(App\Balance::class, function (Faker\Generator $faker) {
-    return [
-        'type' => $faker->numberBetween(0,1),
-        'group_id' => $faker->numberBetween(1,2),
-        'item_id' => $faker->numberBetween(1,10),
     ];
 });

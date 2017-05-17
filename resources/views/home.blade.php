@@ -1,9 +1,7 @@
 @extends("base.main")
 @section("content")
-    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone">
-        </div>
-        <div class="mdl-cell mdl-cell--8-col mdl-card">
+    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--4dp">
+        <div class="mdl-cell mdl-cell--12-col mdl-card">
             <div class="mdl-card__title">
               <div class="mdl-selectfield mdl-selectfield--floating-label mdl-js-selectfield center text-center">
                 <select class="mdl-selectfield__select" name="group" id="group">
@@ -23,16 +21,16 @@
                     </span>
                   </div>
                     <ul class="mdl-list">
-                        @foreach($group->balances as $item)
-                            <li class="mdl-list__item mdl-list__item--two-line">
+                        @foreach($group->items as $item)
+                            <li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp">
                                 <span class="mdl-list__item-primary-content">
                                     <i class="material-icons mdl-list__item-icon">shopping_basket</i>
-                                    <span><a href="{{ url('items/'.$item->id.'/edit') }}">{{ $item->item->name }}</a></span>
-                                    <span class="mdl-list__item-sub-title">{{ $item->item->description }}</span>
+                                    <span><a href="{{ url('items/{id}/edit', $item->id) }}">{{ $item->name }}</a></span>
+                                    <span class="mdl-list__item-sub-title">{{ $item->description }}</span>
                                 </span>
                                 <span class="mdl-list__item-secondary-content">
                                     <span class="mdl-chip mdl-color-text--white mdl-color--{{ $item->isPositive() ? 'green' : 'red' }}-400">
-                                        <span class="mdl-chip__text">S/. {{ $item->item->amount }}</span>
+                                        <span class="mdl-chip__text">S/. {{ $item->amount }}</span>
                                     </span>
                                 </span>
                             </li>

@@ -34,7 +34,7 @@ class User extends Model implements
 
     public function groups()
     {
-        return $this->belongsToMany('App\Group', 'members')->wherePivot('status', 1);
+        return $this->belongsToMany('App\Group', 'memberships')->wherePivot('status', 1);
     }
 
     /**

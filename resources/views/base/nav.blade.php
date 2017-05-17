@@ -13,7 +13,9 @@
     </div>
 </header>
 <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">{{ $who }}</span>
+    <span class="mdl-layout-title">
+        <a href="{{ url('/me') }}">{{ $who }}</a>
+    </span>
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="{{ url('login') }}">Login</a>
         <a class="mdl-navigation__link" href="{{ url('logout') }}">Logout</a>
