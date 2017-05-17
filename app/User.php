@@ -47,6 +47,15 @@ class User extends Model implements
     }
 
     /**
+     * Return column from Groups
+     *
+     */
+    public function getFromGroups($column)
+    {
+        return array_column($this->groups->toArray(), $column);
+    }
+
+    /**
      * Validates if Group belongs to User
      *
      */
