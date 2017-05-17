@@ -12,7 +12,7 @@ class CreateMembershipTable extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('memberships', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('group_id');
             $table->unsignedInteger('user_id');
@@ -31,6 +31,6 @@ class CreateMembershipTable extends Migration
      */
     public function down()
     {
-        Schema::drop('members');
+        Schema::drop('memberships');
     }
 }

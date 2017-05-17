@@ -2,7 +2,7 @@
 /.idea
 /.node_modules
 /public/packages
-/database/*.sqlite
+database/*.sqlite
 Homestead.json
 Homestead.yaml
 .env

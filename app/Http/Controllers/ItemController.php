@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
-use App\Balance;
 use App\Group;
 use App\User;
 
@@ -18,7 +17,10 @@ class ItemController extends Controller
     public function index()
     {
         // GET -> /item
-        return Item::all();
+        $user = User::with('groups')->findOrFail(1);
+        return $user->groups->reduce(function($items, Group $group){
+            return array_merge($items, $group->items->all());
+        }, []);
     }
 
     public function create()

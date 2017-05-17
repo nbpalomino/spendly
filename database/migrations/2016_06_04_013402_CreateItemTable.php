@@ -18,7 +18,11 @@ class CreateItemTable extends Migration
             $table->text('description');
             $table->float('amount')->unsigned();
             $table->boolean('status')->default(true);
+            $table->boolean('type')->default(true);
+            $table->integer('group_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('group_id')->references('id')->on('groups');
         });
     }
 

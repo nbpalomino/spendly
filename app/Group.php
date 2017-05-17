@@ -26,21 +26,21 @@ class Group extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'members')->wherePivot('status', true);
+        return $this->belongsToMany('App\User', 'memberships')->wherePivot('status', 1);
     }
 
-    public function balances()
+    public function items()
     {
-        return $this->hasMany('App\Balance');
+        return $this->hasMany('App\Item');
     }
 
     public function total()
     {
-        return $this->balances->reduce(function($total, Balance $item) {
+        return $this->items->reduce(function($total, Item $item) {
             if($item->isPositive()) {
-                $total += $item->item->amount;
+                $total += $item->amount;
             } else {
-                $total -= $item->item->amount;
+                $total -= $item->amount;
             }
             return $total;
         });

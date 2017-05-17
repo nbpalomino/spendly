@@ -12,7 +12,7 @@
             padding: 1rem 2rem;
         }
     </style>
-    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--4dp">
         <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone">
         </div>
         <div class="app-item-form mdl-card mdl-cell mdl-cell--8-col">
