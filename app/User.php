@@ -37,8 +37,21 @@ class User extends Model implements
         return $this->belongsToMany('App\Group', 'members')->wherePivot('status', 1);
     }
 
-    public function firstGroup()
+    /**
+     * Return Group by Id
+     *
+     */
+    public function getGroup($group_id)
     {
-        return $this->groups[0];
+        return $this->groups->where('id', $group_id)->first();
+    }
+
+    /**
+     * Validates if Group belongs to User
+     *
+     */
+    public function isValidGroup($group_id)
+    {
+        return !is_null($this->getGroup($group_id));
     }
 }

@@ -1,19 +1,27 @@
 @extends("base.main")
 @section("content")
     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-        <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-color--teal-100 mdl-color-text--white">
-            <i class="material-icons">play_circle_filled</i>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone">
         </div>
-        <div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-card">
+        <div class="mdl-cell mdl-cell--8-col mdl-card">
             <div class="mdl-card__title">
-                <h3 class="mdl-card__title-text">BIENVENID@</h3>
+              <div class="mdl-selectfield mdl-selectfield--floating-label mdl-js-selectfield center text-center">
+                <select class="mdl-selectfield__select" name="group" id="group">
+                  @foreach($user->groups as $group)
+                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                  @endforeach
+                </select>
+                <label for="item__type" class="mdl-selectfield__label text-center">MI GRUPO</label>
+              </div>
             </div>
             <div class="mdl-card__supporting-text">
                 @foreach($user->groups as $group)
-                    <span>Dinero disponible en <strong>{{ $group->name }}</strong> hasta el momento.</span>
-                    <span class="mdl-chip mdl-color--{{ $group->total() > 0 ? 'green' : 'red' }}-A700 mdl-color-text--white">
+                  <div class="text-center">
+                    <span>Dinero disponible:</span>
+                    <span class="mdl-chip mdl-color--{{ $group->total() > 0 ? 'green' : 'red' }}-A700 mdl-color-text--white" style="vertical-align:middle;">
                         <span class="mdl-chip__text text-success"  style="font-size: 2rem;">S/. {{ $group->total() }}</span>
                     </span>
+                  </div>
                     <ul class="mdl-list">
                         @foreach($group->balances as $item)
                             <li class="mdl-list__item mdl-list__item--two-line">
@@ -24,30 +32,23 @@
                                 </span>
                                 <span class="mdl-list__item-secondary-content">
                                     <span class="mdl-chip mdl-color-text--white mdl-color--{{ $item->isPositive() ? 'green' : 'red' }}-400">
-                                        <span class="mdl-chip__text">S/. {{ $item->isPositive() ? '' : '-' }}{{ $item->item->amount }}</span>
+                                        <span class="mdl-chip__text">S/. {{ $item->item->amount }}</span>
                                     </span>
                                 </span>
                             </li>
                         @endforeach
                     </ul>
-                    <hr>
                 @endforeach
             </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <a href="{{ url('items/create') }}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">@{{ cta }}</a>
-            </div>
+            <!-- <div class="mdl-card__actions mdl-card--border text-center"></div> -->
         </div>
     </section>
+    <a href="{{ url('items/create') }}" class="floating-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent">
+      <i class="material-icons">add</i>
+    </a>
 @endsection
 
 @section("scripts")
 <script type="text/javascript">
-    var App = new Vue({
-        el: '#App',
-        data: {
-            cta: 'Agregar nuevos items'
-        }
-    });
-    console.dir(App);
 </script>
 @endsection

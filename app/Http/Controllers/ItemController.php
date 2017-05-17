@@ -23,7 +23,7 @@ class ItemController extends Controller
 
     public function create()
     {
-        $user = User::find(1);
+        $user = User::with('groups')->findOrFail(1);
         $data = [
             'who' => $user->name,
             'user' => $user,
@@ -34,23 +34,27 @@ class ItemController extends Controller
     public function store(Request $req)
     {
         // POST -> /item
+        $user = User::with('groups')->findOrFail(1);
+
+        if(! $user->isValidGroup($req->input('group')) ) {
+            return redirect('/item/create');
+        }
 
         try {
-            $user = User::with('groups')->findOrFail(1);
+            $item     = Item::create($req->all());
+            $group    = $user->getGroup($req->input('group'));
 
-            $item = Item::create($req->all());
-
-            $balance = new Balance();
-            $balance->item_id = $item->id;
-            $balance->group_id = $user->groups[0]->id;
-            $balance->type = Balance::NEGATIVE;
-            $balance->save();
+            $balance = $group->balances()->create([
+                'item_id'  => $item->id,
+                'group_id' => $group->id,
+                'type'     => (bool)$req->input('type') ? Balance::POSITIVE : Balance::NEGATIVE,
+            ]);
 
         } catch (Exception $e) {
             return ['status'=>'ERROR', 'message'=>$e->getMessage()];
         }
 
-        return ['status'=>'OK', 'message'=>'Registro creado: '+$item->id];
+        return redirect('/');
     }
 
     public function show(Request $req, $id)
@@ -62,7 +66,8 @@ class ItemController extends Controller
     public function edit($id)
     {
         // GET -> /item/{id}/edit
-        $balance = Balance::with(['group','item'])->find($id);
+        // $balance = Item::with(['balance'])->find($id);
+        $balance = Balance::with(['group','item'])->findByItem($id)->get();
         return $balance;
     }
 

@@ -39,6 +39,17 @@ class Balance extends Model
 
     public function isPositive()
     {
-        return (bool)$this->type;
+        return (bool)$this->type ? Balance::POSITIVE : Balance::NEGATIVE;
+    }
+
+    /**
+     * Scope a query to findByItem.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFindByItem($query, $item_id)
+    {
+        return $query->where('item_id', '=', $item_id);
     }
 }
