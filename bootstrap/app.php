@@ -1,5 +1,5 @@
 <?php
-//echo __DIR__;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
@@ -26,6 +26,12 @@ $app = new Laravel\Lumen\Application(
 $app->withFacades();
 
 $app->withEloquent();
+
+if($app->environment() === 'heroku') {
+    $app->configure('heroku');
+
+    $app->make('config')->set('database.connections', config('heroku.connections'));
+}
 
 /*
 |--------------------------------------------------------------------------

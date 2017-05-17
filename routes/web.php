@@ -34,5 +34,9 @@ $app->group(['prefix'=>'items'], function() use ($app) {
 
 
 $app->get('/version', function () use ($app) {
-    return $app->version();
+	$data = [
+		$app->environment(),
+		config()->all(),
+	];
+    return json_encode($data);
 });
