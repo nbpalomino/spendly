@@ -1,0 +1,29 @@
+{
+  "name": "spendly",
+  "homepage": "https://github.com/nbpalomino/spendly",
+  "authors": [
+    "nbpalomino <nbpalomino@gmail.com>"
+  ],
+  "description": "Spendly app for manage money",
+  "main": "public/index.php",
+  "keywords": [
+    "PERU",
+    "LARAVEL",
+    "LUMEN",
+    "PHP"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/packages",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "material-design-lite": "mdl#^1.2.1",
+    "mdl-select-component": "mdl-selectField#^0.0.8"
+  }
+}
