@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/assets/css/material.min.css" />
     <link rel="stylesheet" href="/assets/css/mdl-selectfield.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.png">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>

@@ -25,7 +25,7 @@
                             <li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp">
                                 <span class="mdl-list__item-primary-content">
                                     <i class="material-icons mdl-list__item-icon">shopping_basket</i>
-                                    <span><a href="{{ url('items/{id}/edit', $item->id) }}">{{ $item->name }}</a></span>
+                                    <span><a href="{{ url('items/'.$item->id.'/edit') }}">{{ $item->name }}</a></span>
                                     <span class="mdl-list__item-sub-title">{{ $item->description }}</span>
                                 </span>
                                 <span class="mdl-list__item-secondary-content">
