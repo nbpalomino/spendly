@@ -1,0 +1,35 @@
+{
+  "name": "spendly",
+  "version": "1.0.0",
+  "description": "Spendless money",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "vue": "^2.3.4",
+    "vue-router": "^2.6.0"
+  },
+  "devDependencies": {
+    "buble": "^0.15.2",
+    "buble-loader": "^0.4.1",
+    "vue-loader": "^12.2.1",
+    "vue-template-compiler": "^2.3.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/spendly-peru.git"
+  },
+  "keywords": [
+    "Spend",
+    "money",
+    "peru",
+    "php"
+  ],
+  "author": "Nick B. Palomino <nbpalomino@gmail.com>",
+  "license": "MIT"
+}

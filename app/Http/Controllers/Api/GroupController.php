@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Laravel\Lumen\Application;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use App\User;
+use App\Group;
 
-class WebController extends Controller
+class GroupController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,15 +28,6 @@ class WebController extends Controller
      */
     public function index(Request $req, Application $app)
     {
-        $user = User::with('groups')->findOrFail(1);
-        /*return $user->firstGroup()->balances->map(function($item){
-            return $item->item->mount;
-        });
-        */
-        $data = [
-            'who' => $user->name,
-            'user' => $user,
-        ];
-        return view('base.main', $data);
+        return User::with('groups')->find(1);
     }
 }

@@ -16,6 +16,13 @@ class Group extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['total'];
+
+    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
@@ -34,7 +41,7 @@ class Group extends Model
         return $this->hasMany('App\Item');
     }
 
-    public function total()
+    public function getTotalAttribute($value)
     {
         return $this->items->reduce(function($total, Item $item) {
             if($item->isPositive()) {
@@ -42,7 +49,7 @@ class Group extends Model
             } else {
                 $total -= $item->amount;
             }
-            return $total;
+            return number_format($total, 2);
         });
     }
 }

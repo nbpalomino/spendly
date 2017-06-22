@@ -6,7 +6,6 @@
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <!-- Loading Material -->
-    <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/assets/css/material.min.css" />
@@ -34,8 +33,9 @@
     @yield('main')
     <!-- /.container -->
     <!-- Load JS here for greater good =============================-->
-    <script async src="/assets/js/material.min.js"></script>
-    <script async src="/assets/js/mdl-selectfield.min.js"></script>
+    <script src="/assets/js/material.min.js"></script>
+    <script src="/assets/js/mdl-selectfield.min.js"></script>
+    <script src="/assets/js/build.js"></script>
     @yield("scripts")
   </body>
 </html>
