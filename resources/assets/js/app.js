@@ -1,5 +1,7 @@
 import Vue from 'vue'
-//import { createRouter } from './router'
-import App from './views/App.vue'
+import router from './router'
 
-const main = new Vue(App).$mount('#app')
+console.log(router);
+const main = new Vue({
+    router,
+}).$mount('#app');

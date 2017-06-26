@@ -1,5 +1,5 @@
-var path      = require('path')
-var webpack   = require('webpack')
+const path      = require('path');
+const webpack   = require('webpack');
 
 module.exports = {
     entry: [
@@ -8,7 +8,7 @@ module.exports = {
         "./resources/assets/js/app.js",
     ],
     output: {
-        path: path.resolve(__dirname, './public/assets/js'),//"./public/assets/js",
+        path: path.resolve(__dirname, './public/assets/js'),
         //publicPath: '/dist/',
         filename: "build.js"
     },
@@ -22,13 +22,17 @@ module.exports = {
                 }
             },{
                 test: /\.js$/,
-                loader: 'buble-loader',
-                exclude: /node_modules/,
-                query: {
-                    objectAssign: 'Object.assign'
+                loader: 'babel-loader',
+                exclude: /(node_modules|bower_components)/,
+                options: {
+                    presets: [['es2015',{modules: false}], 'env'],
+                    plugins: ['syntax-dynamic-import']
                 }
             }
         ]
+    },
+    resolve: {
+        alias: {vue: 'vue/dist/vue.js'}
     },
     plugins: [
     /*
