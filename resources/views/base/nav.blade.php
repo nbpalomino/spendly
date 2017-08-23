@@ -14,7 +14,7 @@
 </header>
 <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">
-        <a href="{{ url('/me') }}">{{ $who }}</a>
+        <a href="{{ url('/u/me') }}">{{ $user->name }}</a>
     </span>
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="{{ url('login') }}">Login</a>

@@ -12,8 +12,9 @@
 */
 $app->get('/', 'WebController@index');
 
-$app->group(['prefix'=>'users'], function() use ($app) {
+$app->group(['prefix'=>'u'], function() use ($app) {
 	$app->get('/', 'UserController@index');
+    $app->get('/me', 'UserController@edit');
 });
 
 

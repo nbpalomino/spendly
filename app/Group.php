@@ -31,7 +31,7 @@ class Group extends Model
 
     public function items()
     {
-        return $this->hasMany('App\Item');
+        return $this->hasMany('App\Item')->where('status', 1);
     }
 
     public function total()

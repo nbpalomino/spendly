@@ -22,7 +22,7 @@
                   </div>
                     <ul class="mdl-list">
                         @foreach($group->items as $item)
-                            <li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp">
+                            <li class="mdl-list__item mdl-list__item--two-line">
                                 <span class="mdl-list__item-primary-content">
                                     <i class="material-icons mdl-list__item-icon">shopping_basket</i>
                                     <span><a href="{{ url('items/'.$item->id.'/edit') }}">{{ $item->name }}</a></span>
