@@ -23,15 +23,14 @@ export default {
         return {
         }
     },
-    computed() {
-        return {
-        }
+    computed: {
+        //
     },
     methods: {
         classByItem(item) {
             return {
-                'mdl-color--green-400': item.type,
-                'mdl-color--red-400': !item.type,
+                'mdl-color--green-400': item.type == '1',
+                'mdl-color--red-400': item.type === '0',
             }
         }
     }

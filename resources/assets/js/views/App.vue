@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios    from 'axios'
     import ListItem from '../components/ListItem.vue'
 
     export default {
@@ -45,7 +45,7 @@
         data() {
             return {
                 app: {
-                    groupId: null,
+                    groupId: 1,
                     currency: '$',
                 },
                 user: {},
@@ -53,25 +53,10 @@
                 errors: [],
             }
         },
-        computed() {
-            return {
-
-            }
+        computed: {
+            //
         },
         components: { ListItem },
-        mounted() {
-            axios.get('/api/v1/me').then(response => {
-                console.log(response);
-                this.user = response.data;
-                response.data.groups.forEach((item, index) => {
-                    this.groups[item.id] = item;
-                });
-                window.componentHandler.upgradeDom();
-            }).catch(e => {
-                this.errors.push(e)
-            })
-            //window.componentHandler.upgradeDom('MaterialSelectfield', 'mdl-js-selectfield');
-        },
         methods: {
             classByMoney(group) {
                 return {
@@ -80,8 +65,24 @@
                 }
             },
         },
-        watch() {
-
-        }
+        watch: { },
+        created() {
+            const vm = this;
+            axios.get('/api/v1/me').then((response) => {
+                console.log(response);
+                vm.user = response.data;
+                vm.user.groups.forEach((item, index) => {
+                    vm.groups[item.id] = item;
+                })
+                //window.componentHandler.upgradeDom();
+            }).catch((e) => {
+                vm.errors.push(e)
+            })
+        },
+        mounted() {
+            Vue.$user = this.user;
+            window.componentHandler.upgradeDom();
+            //window.componentHandler.upgradeDom('MaterialSelectfield', 'mdl-js-selectfield');
+        },
     }
 </script>

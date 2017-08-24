@@ -1,5 +1,6 @@
 const path      = require('path');
 const webpack   = require('webpack');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
     entry: [
@@ -28,14 +29,21 @@ module.exports = {
                     presets: [['es2015',{modules: false}], 'env'],
                     plugins: ['syntax-dynamic-import']
                 }
-            }
+            },{
+                test: /\.pug$/,
+                loader: 'pug-loader',
+                options: {
+                    // vue-loader options
+                }
+            },
         ]
     },
     resolve: {
         alias: {vue: 'vue/dist/vue.js'}
     },
     plugins: [
-    /*
+        new WebpackNotifierPlugin({alwaysNotify: true}),
+        /*
         // short-circuits all Vue.js warning code
         new webpack.DefinePlugin({
           'process.env': {
@@ -48,6 +56,6 @@ module.exports = {
             warnings: false
           }
         }),
-    */
+        */
     ]
 }
