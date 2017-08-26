@@ -16,7 +16,7 @@ const router = new Router({
     //scrollBehavior: () => ({ y: 0 }),
     linkActiveClass: 'active',
     routes: [
-        { path: '/', name: 'app', component: AppView },
+        { path: '/', name: 'index', component: AppView },
         //{ path: '/top/:page(\\d+)?', component: createListView('top') },
         { path: '/item/new', name: 'item.create', component: ItemCreateView },
         { path: '/item/:id(\\d+)/edit', name: 'item.edit', component: ItemEditView },

@@ -27,14 +27,12 @@
                 <!-- <div class="mdl-card__actions mdl-card--border text-center"></div> -->
             </div>
         </section>
-        <a href="#" class="floating-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent">
-            <i class="material-icons">add</i>
-        </a>
+        <router-link :to="{name:'item.create'}" class="floating-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">add</i></router-link>
     </div>
 </template>
 
 <script>
-    import axios    from 'axios'
+    import User    from '../src/User'
     import ListItem from '../components/ListItem.vue'
 
     export default {
@@ -43,15 +41,9 @@
         //     'items'
         // ],
         data() {
-            return {
-                app: {
-                    groupId: 1,
-                    currency: '$',
-                },
-                user: {},
-                groups: {},
-                errors: [],
-            }
+            return Object.assign({
+
+            }, User.info)
         },
         computed: {
             //
@@ -67,22 +59,12 @@
         },
         watch: { },
         created() {
-            const vm = this;
-            axios.get('/api/v1/me').then((response) => {
-                console.log(response);
-                vm.user = response.data;
-                vm.user.groups.forEach((item, index) => {
-                    vm.groups[item.id] = item;
-                })
-                //window.componentHandler.upgradeDom();
-            }).catch((e) => {
-                vm.errors.push(e)
-            })
+            User.load(this);
         },
-        mounted() {
-            Vue.$user = this.user;
+        updated() {
+            console.log('updated');
             window.componentHandler.upgradeDom();
             //window.componentHandler.upgradeDom('MaterialSelectfield', 'mdl-js-selectfield');
-        },
+        }
     }
 </script>

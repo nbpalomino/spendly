@@ -34,22 +34,30 @@ class ItemController extends Controller
 
     public function store(Request $req)
     {
-        // POST -> /item
+        // POST -> /items
+        $data     = [
+            'status' => 'success',
+            'message' => 'Se guardo correctamente...'
+        ];
         $group    = $this->user->getGroup($req->input('group'));
 
         if( !$group ) {
-            return redirect('/item/create?status=error');
+            $data['status'] = 'error';
+            $data['message']= 'No tiene permisos para guardar.';
+            return $data;
         }
 
         try {
             $item = new Item($req->all());
             $group->items()->save($item);
 
-        } catch (Exception $e) {
-            return redirect('/?status=error');
+        } catch (\Exception $e) {
+            $data['status'] = 'error';
+            $data['message']= 'Ocurrio un problema al guardar.';
+            return $data;
         }
 
-        return redirect('/?status=ok');
+        return $data;
     }
 
     public function show(Request $req, $id)

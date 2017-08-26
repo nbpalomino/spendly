@@ -6,12 +6,9 @@
     <main class="mdl-layout__content background">
         <div class="page-content">
             <div id="app">
-                <h1>
-                    Welcome
-                </h1>
                 <p>
-                    <router-link to="/">Go to Foo</router-link>
-                    <router-link to="/item/new">Go to New</router-link>
+                    <router-link to="/">Inicio</router-link>
+                    <router-link to="/item/new">Crear nuevo</router-link>
                 </p>
                 <router-view></router-view>
             </div>

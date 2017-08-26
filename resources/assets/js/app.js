@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import router from './router'
+import router from './src/router'
 
 console.log(router);
 const main = new Vue({
-    router,
+    router
 }).$mount('#app');
