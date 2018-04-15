@@ -52,4 +52,11 @@ class Group extends Model
             return number_format($total, 2);
         });
     }
+
+    public static function createFor(User $user)
+    {
+        $group = Group::create(['name'=>$user->name, 'status'=>true]);
+        $group->users()->save($user);
+        return $group;
+    }
 }

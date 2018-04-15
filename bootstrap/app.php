@@ -33,6 +33,9 @@ if($app->environment() === 'heroku') {
     $app->make('config')->set('database.connections', config('heroku.connections'));
 }
 
+// SESSIONS
+$app->configure('session');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -53,6 +56,14 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+// BINDINGS FOR SESSIONS
+$app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
+    return new \Illuminate\Session\SessionManager($app);
+});
+$app->singleton('cookie', function () use ($app) {
+    return $app->loadComponent('session', 'Illuminate\Cookie\CookieServiceProvider', 'cookie');
+});
+$app->bind('Illuminate\Contracts\Cookie\QueueingFactory', 'cookie');
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +79,10 @@ $app->singleton(
 // $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
+// SESSIONS
+$app->middleware([
+    \Illuminate\Session\Middleware\StartSession::class,
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
@@ -84,9 +99,11 @@ $app->routeMiddleware([
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+// SESSIONS
+$app->register(\Illuminate\Session\SessionServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -99,10 +116,10 @@ $app->routeMiddleware([
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+$app->router->group(['namespace' => 'App\Http\Controllers'], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
-$app->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($app) {
+$app->router->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
     require __DIR__.'/../routes/api.php';
 });
 

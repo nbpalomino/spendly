@@ -10,33 +10,37 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$app->get('/', 'WebController@index');
+$router->get('/', 'WebController@index');
 
-$app->group(['prefix'=>'users'], function() use ($app) {
-	$app->get('/', 'UserController@index');
+$router->group(['prefix'=>'users'], function() use ($router) {
+	$router->get('/', 'UserController@index');
+    $router->post('/', 'UserController@store');
 });
 
 
-$app->get('/login', 'GuardController@login');
-$app->post('/login', 'GuardController@doLogin');
-$app->get('/logout', 'GuardController@logout');
-$app->get('/password-recovery', 'GuardController@recovery');
+$router->get('/login', 'GuardController@login');
+$router->post('/login', 'GuardController@doLogin');
+$router->get('/logout', 'GuardController@logout');
+$router->get('/password-recovery', 'GuardController@recovery');
 
-$app->group(['prefix'=>'items'], function() use ($app) {
-	$app->get('/', 'ItemController@index');
-	$app->get('/create', 'ItemController@create');
-	$app->post('/', 'ItemController@store');
-	$app->get('/{id}', 'ItemController@show');
-	$app->get('/{id}/edit', 'ItemController@edit');
-	$app->put('/{id}', 'ItemController@update');
-	$app->delete('/{id}', 'ItemController@delete');
+$router->get('/register', 'UserController@create');
+
+$router->group(['prefix'=>'items'], function() use ($router) {
+	$router->get('/', 'ItemController@index');
+	$router->get('/create', 'ItemController@create');
+	$router->post('/', 'ItemController@store');
+	$router->get('/{id}', 'ItemController@show');
+	$router->get('/{id}/edit', 'ItemController@edit');
+	$router->put('/{id}', 'ItemController@update');
+	$router->delete('/{id}', 'ItemController@delete');
 });
 
 
-$app->get('/version', function () use ($app) {
+$router->get('/version', function () use ($router) {
 	$data = [
-		$app->environment(),
+		//$router->environment(),
 		config()->all(),
 	];
+	var_dump($router);
     return json_encode($data);
 });

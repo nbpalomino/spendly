@@ -9,6 +9,11 @@ use App\User;
 
 class ItemController extends Controller
 {
+    /**
+     * @var \App\User
+     */
+    protected $user;
+
     public function __construct()
     {
         //$this->middleware('auth', ['except'=>['index']]);
