@@ -17,12 +17,13 @@ class ItemController extends Controller
     public function __construct()
     {
         //$this->middleware('auth', ['except'=>['index']]);
-        $this->user = User::with('groups')->findOrFail(1);
+        //$this->user = User::with('groups')->findOrFail(1);
     }
 
     public function index(Request $req)
     {
         // GET -> /item
+        $this->user = $req->session()->get('user');
         return $this->user->groups->reduce(function($items, Group $group){
             return array_merge($items, $group->items->all());
         }, []);
@@ -30,6 +31,7 @@ class ItemController extends Controller
 
     public function create(Request $req)
     {
+        $this->user = $req->session()->get('user');
         $data = [
             'who' => $this->user->name,
             'user' => $this->user,
@@ -39,6 +41,7 @@ class ItemController extends Controller
 
     public function store(Request $req)
     {
+        $this->user = $req->session()->get('user');
         // POST -> /items
         $data     = [
             'status' => 'success',
@@ -68,11 +71,12 @@ class ItemController extends Controller
     public function show(Request $req, $id)
     {
         // GET -> /item/{id}
-        return Item::findOrFail($id)->with('group');
+        return Item::with('group')->findOrFail($id);
     }
 
     public function edit(Request $req, $id)
     {
+        $this->user = $req->session()->get('user');
         // GET -> /item/{id}/edit
         $groups_id = $this->user->getFromGroups('id');
         $item = Item::with('group')->whereIn('group_id', $groups_id)->findOrFail($id);
@@ -87,7 +91,7 @@ class ItemController extends Controller
     public function update(Request $req, $id)
     {
         // PUT -> /item/{id}
-        $this->user     = User::with('groups')->findOrFail(1);
+        $this->user = $req->session()->get('user');
         $group     = $this->user->getGroup($req->input('group'));
         $groups_id = $this->user->getFromGroups('id');
 

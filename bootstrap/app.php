@@ -57,14 +57,14 @@ $app->singleton(
     App\Console\Kernel::class
 );
 // BINDINGS FOR SESSIONS
-$app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
-    return new \Illuminate\Session\SessionManager($app);
-});
 $app->singleton('cookie', function () use ($app) {
     return $app->loadComponent('session', 'Illuminate\Cookie\CookieServiceProvider', 'cookie');
 });
-$app->bind('Illuminate\Contracts\Cookie\QueueingFactory', 'cookie');
+$app->bind(\Illuminate\Contracts\Cookie\QueueingFactory::class, 'cookie');
 
+$app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
+    return new \Illuminate\Session\SessionManager($app);
+});
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -79,13 +79,13 @@ $app->bind('Illuminate\Contracts\Cookie\QueueingFactory', 'cookie');
 // $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
-// SESSIONS
-$app->middleware([
-    \Illuminate\Session\Middleware\StartSession::class,
-]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+]);
+// SESSIONS
+$app->middleware([
+    \Illuminate\Session\Middleware\StartSession::class,
 ]);
 
 /*

@@ -26,7 +26,7 @@ class WebController extends Controller
      */
     public function index(Request $req, Application $app)
     {
-        $user = User::with('groups')->findOrFail(1);
+        $user = $this->user = $req->session()->get('user');
         /*return $user->firstGroup()->balances->map(function($item){
             return $item->item->mount;
         });

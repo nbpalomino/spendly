@@ -42,7 +42,7 @@
         // ],
         data() {
             return Object.assign({
-
+                item: {}
             }, User.info)
         },
         computed: {

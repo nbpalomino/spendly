@@ -29,19 +29,15 @@ class UserController extends Controller
     {
         $user = User::find(5);
         //$groups = $user->groups;
-
-        $user->RULE = Auth::attempt(['email'=>$user->email, 'password'=>'1234567u']);
-        $request->session()->put('key', 'value');
+        //$request->session()->save();
 
         return $user;
     }
 
     public function create(Request $request)
     {
-        Auth::attempt(['email'=>'miriam.alvarezromero@gmail.com', 'password'=>'1234567u']);
-        $data['title'] = "Crear nuevo usuario ".$request->session()->get('key');
-        var_dump($u = Auth::user());
-
+        //Auth::attempt(['email'=>'miriam.alvarezromero@gmail.com', 'password'=>'1234567u']);
+        $data['title'] = "Crear nuevo usuario ";
 
         return view('register', $data);
     }
@@ -56,11 +52,19 @@ class UserController extends Controller
 
         try {
             $user = new User($req->all());
-            $user->key = str_random(8);
+            $user->password = app('hash')->make($req->get('password'));
+            $user->key      = str_random(8);
             $user->remember_token = str_random(12);
             $user->save();
 
             Group::createFor($user);
+
+            if(Auth::attempt(['email'=>$user->email, 'password'=>$req->get('password')], true))
+            {
+                //TODO: ARREGLAR EL LOGIN NO GUARDA
+                $req->session()->put('user', User::with('groups')->find(Auth::id()));
+                return redirect('/')->with($data);
+            }
 
         } catch (\Exception $e) {
             $data['status']     = 'error';

@@ -29,8 +29,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node_modules/webpack/bin/webpack.js --progress --hide-modules",
-    "watch": "node_modules/webpack/bin/webpack.js --watch --progress --hide-modules"
+    "dev": "node node_modules/webpack/bin/webpack.js --progress --hide-modules",
+    "watch": "node node_modules/webpack/bin/webpack.js --watch --progress --hide-modules"
   },
   "repository": {
     "type": "git",

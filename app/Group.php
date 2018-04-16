@@ -49,7 +49,8 @@ class Group extends Model
             } else {
                 $total -= $item->amount;
             }
-            return number_format($total, 2);
+            //return number_format($total, 2);
+            return $total;
         });
     }
 

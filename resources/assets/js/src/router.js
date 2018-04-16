@@ -19,7 +19,7 @@ const router = new Router({
         { path: '/', name: 'index', component: AppView },
         //{ path: '/top/:page(\\d+)?', component: createListView('top') },
         { path: '/item/new', name: 'item.create', component: ItemCreateView },
-        { path: '/item/:id(\\d+)/edit', name: 'item.edit', component: ItemEditView },
+        { path: '/item/:id(\\d+)/edit', name: 'item.edit', component: ItemEditView, props: true },
         //{ path: '/user/:id', component: UserView },
         //{ path: '/', redirect: '/top' }
     ]

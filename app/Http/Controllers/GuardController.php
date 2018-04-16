@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Laravel\Lumen\Application;
 
@@ -11,7 +13,7 @@ class GuardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except'=>['login','logout']]);
+        //$this->middleware('auth', ['except'=>['login','logout']]);
     }
 
     /**
@@ -35,7 +37,17 @@ class GuardController extends Controller
      */
     public function doLogin(Request $req, Application $app)
     {
-        return $req->all();
+        $this->validate($req, [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        if(Auth::attempt(['email'=>$req->get('email'), 'password'=>$req->get('password')], true))
+        {
+            //TODO: ARREGLAR EL LOGIN NO GUARDA
+            $req->session()->put('user', User::with('groups')->find(Auth::id()));
+            return redirect('/');
+        }
+
     }
 
     /**

@@ -27,6 +27,7 @@ class UserController extends Controller
      */
     public function index(Request $req, Application $app)
     {
-        return User::with('groups')->find(1);
+        $this->user = $req->session()->get('user');
+        return User::with('groups')->find($this->user->id);
     }
 }
