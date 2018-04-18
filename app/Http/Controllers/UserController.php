@@ -63,7 +63,7 @@ class UserController extends Controller
             {
                 //TODO: ARREGLAR EL LOGIN NO GUARDA
                 $req->session()->put('user', User::with('groups')->find(Auth::id()));
-                return redirect('/')->with($data);
+                return redirect('/');
             }
 
         } catch (\Exception $e) {

@@ -68,6 +68,13 @@ export default {
     methods: {
         borrarItem(item) {
             alert(item.name + ' sera borrado');
+            axios.delete('/items/'+this.id).then((response) => {
+                console.dir(response);
+                //window.user = vm.user = response.data;
+                //this.item = response.data;
+            }).catch((e) => {
+                this.errors.push(e)
+            })
         }
     },
     created() {

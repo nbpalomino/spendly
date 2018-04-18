@@ -29,8 +29,8 @@ export default {
     methods: {
         classByItem(item) {
             return {
-                'mdl-color--green-400': item.type == '1',
-                'mdl-color--red-400': item.type === '0',
+                'mdl-color--green-400': item.type === true,
+                'mdl-color--red-400': item.type === false,
             }
         }
     }

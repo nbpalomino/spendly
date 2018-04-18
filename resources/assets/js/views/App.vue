@@ -16,7 +16,7 @@
                             <span>Dinero disponible:</span>
                             <br>
                             <span class="mdl-chip mdl-color-text--white" :class="classByMoney(group)" style="vertical-align:middle;">
-                                <span class="mdl-chip__text text-success"  style="font-size: 2rem;">{{ app.currency }} {{ group.total }}</span>
+                                <span class="mdl-chip__text"  style="font-size: 2rem;">{{ app.currency }} {{ group.total }}</span>
                             </span>
                         </div>
                         <ul class="mdl-list" v-for="item in group.items">
@@ -51,6 +51,7 @@
         components: { ListItem },
         methods: {
             classByMoney(group) {
+              console.log(group);
                 return {
                     'mdl-color--green-A700': group.total > 0,
                     'mdl-color--red-A700': group.total < 0,

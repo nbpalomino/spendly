@@ -44,6 +44,7 @@ class GuardController extends Controller
         if(Auth::attempt(['email'=>$req->get('email'), 'password'=>$req->get('password')], true))
         {
             //TODO: ARREGLAR EL LOGIN NO GUARDA
+            $req->session()->put('user.id', Auth::id());
             $req->session()->put('user', User::with('groups')->find(Auth::id()));
             return redirect('/');
         }
@@ -59,7 +60,9 @@ class GuardController extends Controller
      */
     public function logout(Request $req, Application $app)
     {
-        return $req->all();
+        $req->session()->flush();
+
+        return redirect('login');
     }
 
     /**

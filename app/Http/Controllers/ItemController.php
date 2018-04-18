@@ -114,5 +114,34 @@ class ItemController extends Controller
     public function delete(Request $req, $id)
     {
         // DELETE -> /item/{id}
+        $data     = [
+            'status' => 'success',
+            'message' => 'Se eliminó correctamente...'
+        ];
+        /*
+        $this->user = $req->session()->get('user');
+        $group     = $this->user->getGroup($req->input('group'));
+        $groups_id = $this->user->getFromGroups('id');
+
+        if( !$group ) {
+            return $data = [
+                'status' => 'error',
+                'message' => 'No puedes eliminar por grupo...'
+            ];
+        }*/
+
+        try {
+            $item = Item::findOrFail($id);
+            $item->status = false;
+            $item->save();
+
+        } catch (Exception $e) {
+            return $data = [
+                'status' => 'error',
+                'message' => 'No puedes eliminar ...'.$e->getMessage()
+            ];
+        }
+
+        return $data;
     }
 }

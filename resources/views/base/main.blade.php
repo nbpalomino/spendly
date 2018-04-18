@@ -16,5 +16,8 @@
         @include("base.footer")
     </main>
 </div>
+@endsection
 
+@section('scripts')
+<script src="/assets/js/build.js"></script>
 @endsection

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/assets/css/material.min.css" />
     <link rel="stylesheet" href="/assets/css/mdl-selectfield.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
+
+    @yield("styles")
     <link rel="shortcut icon" href="/favicon.png">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -34,8 +36,7 @@
     <!-- /.container -->
     <!-- Load JS here for greater good =============================-->
     <script src="/assets/js/material.min.js"></script>
-    <script src="/assets/js/mdl-selectfield.min.js"></script>
-    <script src="/assets/js/build.js"></script>
+    <script src="/assets/js/mdl-selectfield.min.js"></script>    
     @yield("scripts")
   </body>
 </html>
